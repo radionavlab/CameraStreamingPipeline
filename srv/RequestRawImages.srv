@@ -1,0 +1,3 @@
+int8 numImages
+---
+sensor_msgs/Image[] images
