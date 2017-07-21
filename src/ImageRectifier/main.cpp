@@ -10,19 +10,19 @@ Mat cameraMatrix;
 Mat distortionCoefficients;
 
 bool serverHandler(camera_streaming_pipeline::RectifyImage::Request &req, camera_streaming_pipeline::RectifyImage::Response &res) {
-    sensor_msgs::Image input = req.distortedImage;
-    Mat inputImage = cv_bridge::toCvCopy(input, "bgr8")->image;
+    sensor_msgs::Image inputImage = req.distortedImage;
+    Mat inputMat = cv_bridge::toCvCopy(inputImage, "bgr8")->image;
 
-    if( !inputImage.data ){
-        cout << "Could not load image" << endl;
-        exit(EXIT_FAILURE);
-    }
+    Mat outputMat;
+    undistort(inputMat, outputMat, cameraMatrix, distortionCoefficients);
 
-    Mat outputImage;
-    undistort(inputImage, outputImage, cameraMatrix, distortionCoefficients);
+    cv_bridge::CvImage img_bridge;
+    sensor_msgs::Image outputImage;
     
-    imshow("img", outputImage);
-    waitKey(0);
+    img_bridge = cv_bridge::CvImage(inputImage.header, sensor_msgs::image_encodings::BGR8, outputMat);
+    img_bridge.toImageMsg(outputImage);
+
+	res.rectifiedImage = outputImage;
 
     return true;
 }
@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
     init(argc, argv, "image_rectifier");
     NodeHandle nh{"~"};
 
-    if (!nh.getParam("/image_rectifier/params/camera_params", cameraParamsFileName)) {
+    if (!nh.getParam("/image_rectifier/distortion_parameters", cameraParamsFileName)) {
         ROS_WARN("No camera params file specified! Exiting!");
         exit(1);
     }

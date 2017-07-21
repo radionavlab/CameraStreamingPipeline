@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="camera_streaming_pipeline" type="image_rectifier" name="image_rectifier" output="screen" >
+        <rosparam param="distortion_parameters" subst_value="True">
+            $(find camera_streaming_pipeline)/data/3mm.yaml
+        </rosparam>
+        <rosparam command="load" file="$(find camera_streaming_pipeline)/config/image_rectifier.yaml"/>
+    </node>
+</launch>

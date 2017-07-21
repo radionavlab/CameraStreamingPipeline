@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="camera_streaming_pipeline" type="pipeline_controller" name="pipeline_controller" output="screen" >
+        <rosparam command="load" file="$(find camera_streaming_pipeline)/config/pipeline_controller.yaml" />
+    </node>
+</launch>
