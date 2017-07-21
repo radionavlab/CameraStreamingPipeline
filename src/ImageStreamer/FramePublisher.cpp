@@ -2,12 +2,12 @@
 // Created by Tucker Haydon on 6/23/17.
 //
 
-#include "../include/FramePublisher.h"
+#include "../../include/ImageStreamer/FramePublisher.h"
 
 using namespace std;
 using namespace ros;
 
-bool FramePublisher::serverHandler(dart_image_streamer::RequestRawImages::Request &req, dart_image_streamer::RequestRawImages::Response &res) {
+bool FramePublisher::serverHandler(camera_streaming_pipeline::RequestRawImages::Request &req, camera_streaming_pipeline::RequestRawImages::Response &res) {
     bufferFrames = true;
     int numFrames = req.numImages;
     int bufferSize = 0;

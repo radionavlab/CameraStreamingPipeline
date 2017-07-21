@@ -1,4 +1,4 @@
-#include "../include/CameraManager.h"
+#include "../../include/ImageStreamer/CameraManager.h"
 
 using namespace Pylon;
 using namespace std;

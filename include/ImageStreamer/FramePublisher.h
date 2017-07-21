@@ -14,7 +14,7 @@
 #include <atomic>
 #include <memory>
 
-#include "dart_image_streamer/RequestRawImages.h"
+#include "camera_streaming_pipeline/RequestRawImages.h"
 
 class FramePublisher {
 public:
@@ -24,7 +24,7 @@ public:
     void publish(std::unique_ptr<sensor_msgs::Image> frame);
     void buffer(std::unique_ptr<sensor_msgs::Image> frame);
     void bufferAndPublish(std::unique_ptr<sensor_msgs::Image> frame);
-    bool serverHandler(dart_image_streamer::RequestRawImages::Request &req, dart_image_streamer::RequestRawImages::Response &res);
+    bool serverHandler(camera_streaming_pipeline::RequestRawImages::Request &req, camera_streaming_pipeline::RequestRawImages::Response &res);
     void loop();
 
     std::map<std::string, std::string> getCameraParams();
