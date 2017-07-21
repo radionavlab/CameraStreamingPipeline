@@ -32,14 +32,14 @@ bool FramePublisher::serverHandler(camera_streaming_pipeline::RequestRawImages::
 }
 
 FramePublisher::FramePublisher(int argc, char** argv) {
-    init(argc, argv, "camera_publisher");
+    init(argc, argv, "image_streamer");
     this->nh = new NodeHandle("~");
     this->it = new image_transport::ImageTransport(*(this->nh));
     this->pub = it->advertise("raw_image", 1);
     this->service = nh->advertiseService("RequestRawImages", &FramePublisher::serverHandler, this);
 
     // Load the camera parameters
-    if (!this->nh->getParam("camera/params", this->cameraParams)) {
+    if (!this->nh->getParam("/image_streamer/params", this->cameraParams)) {
         ROS_WARN("No camera params found!");
         exit(1);
     }

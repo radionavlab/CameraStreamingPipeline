@@ -1,0 +1,22 @@
+params: {
+    #Width in pixels
+    Width: "1280",
+    
+    #Height in pixels
+    Height: "960",
+    
+    # Time in ms
+    AutoExposureTimeUpperLimit: "5000",
+    
+    # publish, buffer
+    FrameHandler: "buffer",
+    
+    # Mono8, Mono10, Mono10p, Mono12, Mono12p,
+    # BayerGR8, BayerRG8, BayerGB8, BayerBG8, BayerGR10,
+    # BayerGR10p, BayerRG10, BayerRG10p, BayerGB10, 
+    # BayerGB10p, BayerBG10, BayerBG10p, BayerGR12, 
+    # BayerGR12p, BayerRG12, BayerRG12p, BayerGB12, 
+    # BayerGB12p, BayerBG12, BayerBG12p, RGB8, BGR8, 
+    # YCbCr422_8 
+    PixelFormat: "RGB8",
+}

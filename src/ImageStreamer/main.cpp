@@ -8,6 +8,8 @@ using namespace std;
 using namespace Pylon;
 using namespace ros;
 
+string frameHandler = "publish";
+
 void frameCallbackFunction(unique_ptr<CPylonImage> frame) {
 
     if(framePublisher->busy) {
@@ -21,7 +23,7 @@ void frameCallbackFunction(unique_ptr<CPylonImage> frame) {
     static int seq = 0;
 
     vector<uint8_t> data;
-    data.assign(buffer, buffer + (width * height *3));
+    data.assign(buffer, buffer + (width * height * 3));
 
     unique_ptr<sensor_msgs::Image> im = std::make_unique<sensor_msgs::Image>();
     im->header.seq = seq++;
@@ -34,7 +36,15 @@ void frameCallbackFunction(unique_ptr<CPylonImage> frame) {
     im->step=width * 1 * 3;
     im->data=data;
 
-    framePublisher->buffer(std::move(im));
+    if(frameHandler == "buffer") {
+        framePublisher->buffer(std::move(im));
+    } else if(frameHandler == "publish"){
+        framePublisher->publish(std::move(im));
+    } else if(frameHandler == "bufferAndPublish") {
+        framePublisher->bufferAndPublish(std::move(im));
+    } else {
+        framePublisher->publish(std::move(im));
+    }
 }
 
 void publisherLoop(FramePublisher *pub) {
@@ -48,8 +58,11 @@ void cameraLoop(CameraManager *cm) {
 
 int main(int argc, char **argv) {
     framePublisher = new FramePublisher(argc, argv);
-    cameraManager = new CameraManager(framePublisher->getCameraParams());
+    map<string, string> cameraParams = framePublisher->getCameraParams();
+    frameHandler = cameraParams.at("FrameHandler");
 
+
+    cameraManager = new CameraManager(cameraParams);
     cameraManager->setFrameCallbackFunction(frameCallbackFunction);
 
     future<void> ret1 = async(launch::async, publisherLoop, framePublisher);

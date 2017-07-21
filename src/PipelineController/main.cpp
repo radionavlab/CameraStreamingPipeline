@@ -6,12 +6,12 @@ using namespace ros;
 
 int main(int argc, char **argv) {
 
-    init(argc, argv, "image_pipeline_controller");
+    init(argc, argv, "pipeline_controller");
     NodeHandle nh{"~"};
 
-    ServiceClient rawImagesClient = nh.serviceClient<image_pipeline_controller::RequestRawImages>("/camera_publisher/RequestRawImages");
+    ServiceClient rawImagesClient = nh.serviceClient<camera_streaming_pipeline::RequestRawImages>("/camera_publisher/RequestRawImages");
     // ServiceClient bestImageClient = nh.serviceClient<image_pipeline_controller::RequestBestImage>("RequestRawImages");
-    ServiceClient rectifiedImageClient = nh.serviceClient<image_pipeline_controller::RectifyImage>("/image_rectifier/RectifyImage");
+    ServiceClient rectifiedImageClient = nh.serviceClient<camera_streaming_pipeline::RectifyImage>("/image_rectifier/RectifyImage");
 
     camera_streaming_pipeline::RequestRawImages rawImagesSrv;
     // image_pipeline_controller::RequestBestImage bestImageSrv;
