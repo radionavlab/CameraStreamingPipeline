@@ -13,6 +13,8 @@
 #include <mutex>
 #include <atomic>
 #include <memory>
+#include <thread>
+#include <chrono>
 
 #include "camera_streaming_pipeline/RequestRawImages.h"
 

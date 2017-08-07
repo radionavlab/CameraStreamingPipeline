@@ -4,7 +4,7 @@
 #  PYLON_INCLUDE_DIRS - The Pylon include directories
 #  PYLON_LIBRARIES - The libraries needed to use Pylon
 
-set( PYLON_LIBRARY "/opt/pylon5/lib64" )
+set( PYLON_LIBRARY "/opt/pylon5/lib" )
 
 FIND_PATH( PYLON_INCLUDE_DIR pylon/PylonBase.h
             PATHS

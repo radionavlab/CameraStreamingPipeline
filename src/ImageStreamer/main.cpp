@@ -8,7 +8,7 @@ using namespace std;
 using namespace Pylon;
 using namespace ros;
 
-string frameHandler = "publish";
+string frameHandler = "publish"; 
 
 void frameCallbackFunction(unique_ptr<CPylonImage> frame) {
 

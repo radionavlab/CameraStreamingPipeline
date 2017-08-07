@@ -66,6 +66,7 @@ map<string, string> FramePublisher::getCameraParams() {
 void FramePublisher::publish(unique_ptr<sensor_msgs::Image> frame) {
     this->busy = true;
     this->pub.publish(*frame);
+    this_thread::sleep_for(chrono::milliseconds(500));
     this->busy = false;
 }
 

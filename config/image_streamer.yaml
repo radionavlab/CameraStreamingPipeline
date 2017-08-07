@@ -1,15 +1,18 @@
 params: {
     #Width in pixels
-    Width: "1280",
+    Width: "1600",
     
     #Height in pixels
-    Height: "960",
-    
-    # Time in ms
-    AutoExposureTimeUpperLimit: "5000",
-    
+    Height: "1200",
+     
     # publish, buffer
-    FrameHandler: "buffer",
+    FrameHandler: "publish",
+
+    # Off, Once, Continuous
+    BalanceWhiteAuto: "Continuous",
+
+    # Off, Daylight5000K, Daylight6500K, Tungsten2800K
+    LightSourcePreset: "Tungsten2800K",
     
     # Mono8, Mono10, Mono10p, Mono12, Mono12p,
     # BayerGR8, BayerRG8, BayerGB8, BayerBG8, BayerGR10,

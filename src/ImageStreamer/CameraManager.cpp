@@ -50,19 +50,16 @@ void CameraManager::initParameters() {
         this->camera->GetStreamGrabberParams().MaxTransferSize.SetValue(4194304);
         this->camera->GetStreamGrabberParams().MaxBufferSize.SetValue(4194304);
 
-        /*
+        /*        
         // Limit the throughput
         this->camera->DeviceLinkSelector.SetValue(0);
         this->camera->DeviceLinkThroughputLimitMode.SetValue(DeviceLinkThroughputLimitMode_On);
         this->camera->DeviceLinkThroughputLimit.SetValue(32000000);
         */
       
-        /*
-        this->camera->AutoExposureTimeUpperLimit.FromString(gcstring(params.at("AutoExposureTimeUpperLimit").c_str()));
         this->camera->BalanceWhiteAuto.FromString(gcstring(params.at("BalanceWhiteAuto").c_str()));
-        this->camera->GainAuto.FromString(gcstring(params.at("GainAuto").c_str()));
         this->camera->LightSourcePreset.FromString(gcstring(params.at("LightSourcePreset").c_str()));
-        */
+        
 
 
         this->camera->Close();
